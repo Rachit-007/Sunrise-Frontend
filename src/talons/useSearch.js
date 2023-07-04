@@ -18,7 +18,7 @@ const useSearch = () => {
 
   const getSuggestion = debounce((e) => {
     handleChange(e.target.value);
-  }, 300);
+  }, 600);
 
   const handleChange = (value) => {
     if (value === "") {
