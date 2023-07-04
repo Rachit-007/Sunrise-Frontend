@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useAccordian from "../../talons/useAccordian";
 
 const Accordion = ({ details }) => {

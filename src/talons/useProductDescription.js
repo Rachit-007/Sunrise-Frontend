@@ -11,12 +11,30 @@ const useProductDescription = () => {
     error,
   } = useQuery(GET_SINGLE_PRODUCT, { variables: { singleProductId: id } });
 
+  /**
+   * this variable will extract the attributes from the data of the product
+   */
   const attributes = productData?.singleProduct.masterVariant.attributes;
-  const size = productData && find(attributes, { name: "size" });
-  const color = productData && find(attributes, { name: "color" });
-  const gender = productData && find(attributes, { name: "gender" });
-  const brand = productData && find(attributes, { name: "designer" });
 
+  /**
+   * it will extract the size from the attributes
+   */
+  const size = productData && find(attributes, { name: "size" });
+
+  /**
+   * it will extract the color from the attributes
+   */
+  const color = productData && find(attributes, { name: "color" });
+
+  /**
+   * it will extract the gender from the attributes
+   */
+  const gender = productData && find(attributes, { name: "gender" });
+
+  /**
+   * it will extract the designer from the attributes
+   */
+  const brand = productData && find(attributes, { name: "designer" });
 
   return {
     productData,

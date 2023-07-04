@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { CartBtn } from "../cartBtn";
 import { getPrice } from "../priceCalculator";
+import PropTypes from "prop-types";
 
 const ProductCard = ({ product }) => {
   return (
@@ -40,3 +41,10 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
+
+ProductCard.propTypes = {
+  props: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    product: PropTypes.arrayOf().isRequired,
+  }).isRequired,
+};

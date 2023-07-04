@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import useBreadcrumb from "../../talons/useBreadcrumb";
 
 const BreadCrumb = ({ productName }) => {
   const { navigate } = useBreadcrumb();
+
   return (
     <ul className="flex flex-wrap items-center mb-3">
       <span onClick={() => navigate()}>

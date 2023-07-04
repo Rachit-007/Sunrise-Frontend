@@ -11,6 +11,11 @@ const useProductListing = () => {
 
   const searchedProduct = searchParams.get("search");
 
+  /**
+   * this useEffect will call when the url is changed
+   * if url consist search product it will fetch searched product
+   * if url doesnt consist search product it will fetch home page products
+   */
   useEffect(() => {
     if (searchedProduct) {
       getProducts({ variables: { searchedProduct } });
