@@ -80,7 +80,11 @@ const useLoginUsingMobile = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
-        toast.error("Failed to send OTP");
+        if (error.code === "auth/invalid-phone-number") {
+          toast.error("Invalid PhoneNumber!!");
+        } else {
+          toast.error("Failed to send OTP!!");
+        }
       });
   }
 
@@ -108,8 +112,12 @@ const useLoginUsingMobile = () => {
         toast.success("User Created Successfully!!");
       })
       .catch((err) => {
-        toast.error("User Already Exists!!");
-        console.log(err);
+        setLoading(false);
+        if (err.code == "auth/invalid-verification-code") {
+          toast.error("Wrong OTP!!");
+        } else if (err.code == "auth/code-expired") {
+          toast.error("OTP Expired Please Try Again!!");
+        }
       });
   }
 
