@@ -1,13 +1,16 @@
+import { useMutation } from "@apollo/client";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase";
+import { GET_ACCESS_TOKEN } from "../graphql/user/getToken";
 
 const useLoginMobile = () => {
   const { register, handleSubmit } = useForm();
   const nav = useNavigate();
+  const [getToken] = useMutation(GET_ACCESS_TOKEN);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
 
@@ -40,15 +43,17 @@ const useLoginMobile = () => {
   }
 
   function onOTPVerify(otp) {
-    console.log("Hit");
-    console.log(otp);
     setLoading(true);
     window.confirmationResult
       .confirm(otp)
       .then(async (res) => {
         setLoading(false);
-        console.log(res);
         toast.success("User Login Successfully!!");
+        const { data } = await getToken({
+          variables: { input: res._tokenResponse.idToken },
+        });
+        console.log(data);
+        // console.log(res)
         nav("/");
       })
       .catch((err) => {
