@@ -4,7 +4,7 @@ import { Search } from "../searchBar";
 const Header = () => {
   return (
     <header className="text-gray-600 body-font bg-gray-200 mb-10 fixed top-0 w-full shadow-lg z-50">
-      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center max-sm:flex-row max-sm:p-3 max-sm:justify-between ">
+      <div className="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center max-sm:flex-row max-sm:p-3 max-sm:justify-between ">
         <Link to="/">
           <img
             src="https://sunrise.commercetools.com/img/logo.6528bde1.svg"
@@ -18,20 +18,27 @@ const Header = () => {
           <a className="mr-5 hover:text-gray-900">ACCESSORIES</a>
         </nav>
         <Search />
-        <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 max-sm:pt-0 max-sm:mt-0">
-          Sign Up
-          <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-4 h-4 ml-1"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </button>
+        <Link to="/login">
+          <div className="flex-col justify-center items-center  border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 max-sm:pt-0 max-sm:mt-0">
+            <div className="text-center flex justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="30"
+                height="30"
+                id="user"
+              >
+                <path
+                  fill="#000"
+                  fill-rule="evenodd"
+                  d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Zm3-12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 7a7.489 7.489 0 0 1 6-3 7.489 7.489 0 0 1 6 3 7.489 7.489 0 0 1-6 3 7.489 7.489 0 0 1-6-3Z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <span>My Account</span>
+          </div>
+        </Link>
       </div>
     </header>
   );
