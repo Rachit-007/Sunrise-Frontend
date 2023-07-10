@@ -13,7 +13,7 @@ import { auth } from "../firebase";
 import { CHECK_USER } from "../graphql/user/checkUser";
 import { ADD_USER } from "../graphql/user/createUser";
 
-const useLoginUsingMobile = () => {
+const useSignup = () => {
   const [addUser] = useMutation(ADD_USER);
   const [chekUser] = useMutation(CHECK_USER);
   const { register, handleSubmit } = useForm();
@@ -121,6 +121,14 @@ const useLoginUsingMobile = () => {
       });
   }
 
+  /**
+   *function is responsible for link email password with the mobile number and also adds user to merchant center
+   * @param {string} user
+   * @param {string} email
+   * @param {string} password
+   * @param {string} firstname
+   * @param {string} lastname
+   */
   async function linkEmailPasswordProvider(
     user,
     email,
@@ -152,4 +160,4 @@ const useLoginUsingMobile = () => {
   };
 };
 
-export default useLoginUsingMobile;
+export default useSignup;

@@ -1,8 +1,8 @@
 import React from "react";
 import size from "lodash/size";
 import OtpForm from "./otpForm";
-import useLoginUsingMobile from "../../talons/useSignup";
 import Loader from "../loader/buttonLoader";
+import useSignup from "../../talons/useSignup";
 
 const SignupForm = () => {
   const {
@@ -13,7 +13,7 @@ const SignupForm = () => {
     onOTPVerify,
     setUser,
     loading,
-  } = useLoginUsingMobile();
+  } = useSignup();
 
   return (
     <>

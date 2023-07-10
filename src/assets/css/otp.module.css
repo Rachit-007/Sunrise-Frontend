@@ -104,11 +104,7 @@
     letter-spacing: 0.7px;
 }
 
-.form_continueBtn svg {
-    display: inline-block;
-    transform: rotate(180deg);
-    padding-right: 10px;
-}
+
 
 .modal_checkboxGrp {
     margin-top: 10px;

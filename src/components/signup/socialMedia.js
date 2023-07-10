@@ -1,6 +1,8 @@
 import React from "react";
+import useSocialMediaLogin from "../../talons/useSocialMediaLogin";
 
 const SocialMedia = () => {
+  const { signinWithGoogle } = useSocialMediaLogin();
   return (
     <>
       <div className="flex items-center justify-between mt-4">
@@ -16,8 +18,12 @@ const SocialMedia = () => {
         <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
       </div>
 
-      <div className="px-2 py-2 flex justify-center mt-3 border-2 rounded-full w-fit mx-auto">
-        <svg className="w-6 h-6" viewBox="0 0 40 40">
+      <div className="px-2 py-2 flex justify-center mt-3 border-2 rounded-full w-fit mx-auto cursor-pointer">
+        <svg
+          className="w-6 h-6"
+          viewBox="0 0 40 40"
+          onClick={() => signinWithGoogle()}
+        >
           <path
             d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
             fill="#FFC107"
