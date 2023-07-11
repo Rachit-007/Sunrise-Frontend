@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import {
   EmailAuthProvider,
+  fetchSignInMethodsForEmail,
   linkWithCredential,
   RecaptchaVerifier,
   signInWithPhoneNumber,
@@ -40,17 +41,6 @@ const useSignup = () => {
     phone,
   }) {
     setLoading(true);
-    if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: (response) => {},
-          "expired-callback": () => {},
-        },
-        auth
-      );
-    }
     try {
       let { data } = await chekUser({
         variables: {
@@ -66,6 +56,17 @@ const useSignup = () => {
       }
     } catch (err) {
       console.log(err);
+    }
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: (response) => {},
+          "expired-callback": () => {},
+        },
+        auth
+      );
     }
     const appVerifier = window.recaptchaVerifier;
     const formatPh = countryCode + phone;
@@ -108,7 +109,7 @@ const useSignup = () => {
           lastname
         );
         setLoading(false);
-        nav("/login");
+        nav("/");
         toast.success("User Created Successfully!!");
       })
       .catch((err) => {

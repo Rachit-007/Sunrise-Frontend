@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const SIGNUP_GOOGLE = gql`
-  mutation AddUserUsingGoogle($input: String) {
-    addUserUsingGoogle(input: $input)
+export const CHECK_FOR_GOOGLE = gql`
+  mutation CheckUserGoogle($input: String) {
+    addUserGoogle(input: $input)
   }
 `;

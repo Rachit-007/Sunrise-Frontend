@@ -1,31 +1,45 @@
 import { useMutation } from "@apollo/client";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase";
-import { SIGNUP_GOOGLE } from "../graphql/user/signupGoogle";
+import { CHECK_FOR_GOOGLE } from "../graphql/user/signupGoogle";
 
 const useSocialMediaLogin = () => {
-  const [signupGoogle] = useMutation(SIGNUP_GOOGLE);
   const nav = useNavigate();
+  const path = useLocation();
+  const [checkUserForGoogle, { error }] = useMutation(CHECK_FOR_GOOGLE);
 
+  /**
+   *
+   *
+   * @return {*} sets token in the cookie
+   */
   const signinWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
+    provider.addScope("email");
     try {
-      const { user } = await signInWithPopup(auth, provider);
-      console.log(user);
-      const { data } = await signupGoogle({
-        variables: { input: user.accessToken },
+      const results = await signInWithRedirect(auth, provider);
+      const { data } = await checkUserForGoogle({
+        variables: { input: results._tokenResponse.idToken },
       });
       console.log(data);
-      if (data.addUserUsingGoogle) {
+      if (data.addUserGoogle.createUser === true) {
         nav("/");
-        toast.success("User added successfully!!");
-      } else {
-        toast.error("Cant create user!!");
+        return toast.success("User created successfully!!!");
       }
-    } catch (err) {
-      console.log(err);
+      if (data.addUserGoogle.createUser === false) {
+        return toast.error("User already exists!!!");
+      }
+      if (data.addUserGoogle.loginUser === true) {
+        nav("/");
+        return toast.success("Login success!");
+      }
+      if (data.addUserGoogle.loginUser === false) {
+        return toast.success("Failed to ogin");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
