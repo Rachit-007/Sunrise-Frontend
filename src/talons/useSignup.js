@@ -96,7 +96,7 @@ const useSignup = () => {
    * this function will verify the otp
    */
 
-  function onOTPVerify(firstname, lastname, email, password, otp) {
+  const onOTPVerify = (firstname, lastname, email, password, otp) => {
     setLoading(true);
     window.confirmationResult
       .confirm(otp)
@@ -121,7 +121,7 @@ const useSignup = () => {
           toast.error("OTP Expired Please Try Again!!");
         }
       });
-  }
+  };
 
   /**
    *function is responsible for link email password with the mobile number and also adds user to merchant center
