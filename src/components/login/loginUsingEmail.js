@@ -11,7 +11,7 @@ const LoginUsingEmail = () => {
         <div className="border-2 border-gray-200 p-2 rounded-xl mt-6 ">
           <input
             {...register("email", { required: true })}
-            type="tel"
+            type="text"
             className="outline-none ps-2 font-normal border-l-gray-700  w-full"
             placeholder="Email"
           />
@@ -19,7 +19,7 @@ const LoginUsingEmail = () => {
         <div className="border-2 border-gray-200 p-2 rounded-xl mt-6">
           <input
             {...register("password", { required: true })}
-            type="tel"
+            type="text"
             className="outline-none ps-2 font-normal border-l-gray-700  w-full"
             placeholder="Password"
           />
