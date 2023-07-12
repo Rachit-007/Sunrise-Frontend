@@ -22,7 +22,7 @@ const SignupForm = () => {
           <div className="border-2 border-gray-200 p-2 rounded-xl mt-8 ">
             <input
               {...register("firstname", { required: true })}
-              type="tel"
+              type="text"
               className="outline-none ps-2 font-normal border-l-gray-700  w-full"
               placeholder="FirstName"
             />
@@ -30,7 +30,7 @@ const SignupForm = () => {
           <div className="border-2 border-gray-200 p-2 rounded-xl mt-6 ">
             <input
               {...register("lastname", { required: true })}
-              type="tel"
+              type="text"
               className="outline-none ps-2 font-normal border-l-gray-700  w-full"
               placeholder="LastName"
             />
@@ -38,7 +38,7 @@ const SignupForm = () => {
           <div className="border-2 border-gray-200 p-2 rounded-xl mt-6 ">
             <input
               {...register("email", { required: true })}
-              type="tel"
+              type="text"
               className="outline-none ps-2 font-normal border-l-gray-700  w-full"
               placeholder="Email"
             />
@@ -46,7 +46,7 @@ const SignupForm = () => {
           <div className="border-2 border-gray-200 p-2 rounded-xl mt-6">
             <input
               {...register("password", { required: true })}
-              type="tel"
+              type="text"
               className="outline-none ps-2 font-normal border-l-gray-700  w-full"
               placeholder="Password"
             />

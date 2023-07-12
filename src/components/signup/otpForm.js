@@ -34,7 +34,7 @@ const OtpForm = ({ user, onOTPVerify, setUser, loading }) => {
             <OTPInput
               value={otp}
               onChange={setOtp}
-              inputType="number"
+              inputType="tel"
               OTPLength={6}
               shouldAutoFocus
               renderInput={(props) => <input {...props} />}
