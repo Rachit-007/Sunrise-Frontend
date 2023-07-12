@@ -1,14 +1,17 @@
 import { useMutation } from "@apollo/client";
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase";
-import { CHECK_FOR_GOOGLE } from "../graphql/user/signupGoogle";
+import { LOGIN_GOOGLE } from "../graphql/user/signupGoogle";
 
 const useSocialMediaLogin = () => {
   const nav = useNavigate();
   const path = useLocation();
-  const [checkUserForGoogle, { error }] = useMutation(CHECK_FOR_GOOGLE);
+  const [checkUserForGoogle, { error }] = useMutation(LOGIN_GOOGLE);
 
   /**
    *
@@ -19,7 +22,8 @@ const useSocialMediaLogin = () => {
     const provider = new GoogleAuthProvider();
     provider.addScope("email");
     try {
-      const results = await signInWithRedirect(auth, provider);
+      const results = await signInWithPopup(auth, provider);
+      console.log("called");
       const { data } = await checkUserForGoogle({
         variables: { input: results._tokenResponse.idToken },
       });
