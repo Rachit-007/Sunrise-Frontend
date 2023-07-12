@@ -46,10 +46,11 @@ const useSignup = () => {
         variables: {
           input: {
             email: email,
-            phone: phone,
+            phone: countryCode + phone,
           },
         },
       });
+      console.log(data);
       if (!data.checkUser.createUser) {
         setLoading(false);
         return toast.error("User Already Exist!!");
