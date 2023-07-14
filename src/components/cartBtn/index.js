@@ -1,15 +1,10 @@
 import React, { useState } from "react";
+import useAddToCart from "../../talons/useAddToCart";
 
-export const CartBtn = ({ height, width }) => {
-  const [cartQty, setCartQty] = useState(0);
-
-  const increment = () => {
-    setCartQty(cartQty + 1);
-  };
-
-  const decrement = () => {
-    setCartQty(cartQty - 1);
-  };
+export const CartBtn = ({ height, width, productId }) => {
+  const { increment, decrement, cartQty, setCartQty } = useAddToCart({
+    productId,
+  });
 
   return (
     <div>

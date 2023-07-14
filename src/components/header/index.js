@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import MiniCart from "../cart/mincart";
 import { Search } from "../searchBar";
 
 const Header = () => {
@@ -18,8 +19,9 @@ const Header = () => {
           <a className="mr-5 hover:text-gray-900">ACCESSORIES</a>
         </nav>
         <Search />
+        <MiniCart />
         <Link to="/login">
-          <div className="flex-col justify-center items-center  border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 max-sm:pt-0 max-sm:mt-0">
+          <div className="flex-col justify-center items-center border-0 py-1 px-3 focus:outline-none  text-gray-500 hover:text-gray-800 rounded text-base mt-4 md:mt-0 max-sm:pt-0 max-sm:mt-0 group">
             <div className="text-center flex justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +31,8 @@ const Header = () => {
                 id="user"
               >
                 <path
-                  fill="#000"
+                  className="group-hover:fill-gray-800"
+                  fill="grey"
                   fill-rule="evenodd"
                   d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Zm3-12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 7a7.489 7.489 0 0 1 6-3 7.489 7.489 0 0 1 6 3 7.489 7.489 0 0 1-6 3 7.489 7.489 0 0 1-6-3Z"
                   clip-rule="evenodd"

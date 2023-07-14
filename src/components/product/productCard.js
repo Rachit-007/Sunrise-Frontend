@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { CartBtn } from "../cartBtn";
 import { getPrice } from "../priceCalculator";
 import PropTypes from "prop-types";
+import useProductCard from "../../talons/useProductCard";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useProductCard();
+
+  // console.log("varientid", product);
+
   return (
     <div className="relative">
       <Link to={`/product/${product.id}`}>
@@ -34,7 +38,12 @@ const ProductCard = ({ product }) => {
         </div>
       </Link>
       <div className="absolute right-3 bottom-3">
-        <CartBtn height={2} width={3} />
+        <button
+          onClick={() => addToCart(product.id)}
+          className={`flex ml-auto text-white z-50 bg-green-600 border-0 py-2 px-3 focus:outline-none hover:bg-green-800 rounded`}
+        >
+          Add To Cart
+        </button>
       </div>
     </div>
   );
