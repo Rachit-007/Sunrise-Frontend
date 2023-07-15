@@ -12,7 +12,7 @@ const OtpForm = ({ user, onOTPVerify, setUser, loading }) => {
 
   return (
     <>
-      <div class="mx-auto overflow-hidden bg-white rounded-lg  dark:bg-gray-800 max-w-md   p-7">
+      <div class="mx-auto overflow-hidden bg-white rounded-lg max-w-md p-7">
         <p className={`${style.form_head} font-bold text-3xl text-gray-700`}>
           Enter OTP
         </p>

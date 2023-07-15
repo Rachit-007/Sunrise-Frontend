@@ -121,13 +121,13 @@ const Accordion = ({ details }) => {
       {productDetailsOpen && (
         <div className="pl-6 lg:pl-12 pr-6 py-4 mb-4 bg-gray-100">
           <div className="mb-5 mt-6 flex items-center pb-5">
-            <div className=" text-left text-base text-gray-500 dark:text-gray-400">
+            <div className=" text-left text-base text-gray-500 :text-gray-400">
               <div className="relative flex flex-wrap max-sm:flex-col gap-3">
                 {details.map((detail,index) => (
-                  <div key={index} className="flex border-b w-[565px] flex-row justify-between bg-white flex-wrap dark:border-gray-700 dark:bg-gray-80 max-sm:w-full max-sm:text-sm ">
+                  <div key={index} className="flex border-b w-[565px] flex-row justify-between bg-white flex-wrap  max-sm:w-full max-sm:text-sm ">
                     <div
                       scope="row"
-                      className="bg-gray-50 px-6 py-3 text-base uppercase font-bold  text-gray-700 dark:bg-gray-700 dark:text-gray-400"
+                      className="bg-gray-50 px-6 py-3 text-base uppercase font-bold  text-gray-700 "
                     >
                       {detail.name}
                     </div>

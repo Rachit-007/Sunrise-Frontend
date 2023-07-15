@@ -1,24 +1,27 @@
-import { useLazyQuery, useMutation } from "@apollo/client";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { GET_CART } from "../graphql/cart/getCart";
+import { useEffect } from "react";
+import { useState } from "react";
 import { REMOVE_CART_ITEM } from "../graphql/cart/removeCartItem";
+import { toast } from "react-toastify";
+import { UPDATE_CART_QTY } from "../graphql/cart/updateCartQty";
 
-const useOpenMiniCart = () => {
-    const cart = localStorage.getItem("cart");
-    const version = localStorage.getItem("version");
-    const [loading, setLoading] = useState(true);
+export const useCart = () => {
+  const [getCartDetails] = useLazyQuery(GET_CART);
+  const cart = localStorage.getItem("cart");
+  const version = localStorage.getItem("version");
+  const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState({});
-  const [getCartItems] = useLazyQuery(GET_CART, {
+  const [removeCart] = useMutation(REMOVE_CART_ITEM, {
     fetchPolicy: "network-only",
   });
-  const [removeCart] = useMutation(REMOVE_CART_ITEM, {
+  const [updateCart] = useMutation(UPDATE_CART_QTY, {
     fetchPolicy: "network-only",
   });
 
   const getCartData = async () => {
     try {
-      const { data } = await getCartItems({ variables: { data: { cart } } });
+      const { data } = await getCartDetails({ variables: { data: { cart } } });
       setCartItems(data.getCart);
       setLoading(false);
     } catch (err) {
@@ -32,7 +35,7 @@ const useOpenMiniCart = () => {
       let { data } = await removeCart({
         variables: { data: { cart, version, lineItemId } },
       });
-      console.log(data);
+      //   console.log(data);
       setCartItems(data.removeCartItem);
       toast.success("Item removed successfully");
       localStorage.setItem("version", data.removeCartItem.version);
@@ -49,13 +52,5 @@ const useOpenMiniCart = () => {
     }
   }, []);
 
-  return {
-    getCartData,
-    setLoading,
-    loading,
-    removeCartItem,
-    cartItems,
-  };
+  return { cartItems, loading, removeCartItem };
 };
-
-export default useOpenMiniCart;

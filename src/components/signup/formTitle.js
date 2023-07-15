@@ -4,7 +4,7 @@ const FormTitle = ({ title }) => {
   return (
     <div>
       <div className="flex justify-between mx-auto">
-        <p className=" text-2xl text-center text-gray-600 dark:text-gray-200 font-bold ">
+        <p className=" text-2xl text-center text-gray-600 font-bold ">
           {title}
         </p>
         <img

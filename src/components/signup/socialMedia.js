@@ -6,16 +6,16 @@ const SocialMedia = () => {
   return (
     <>
       <div className="flex items-center justify-between mt-4">
-        <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
+        <span className="w-1/5 border-b  lg:w-1/4"></span>
 
         <a
           href="#"
-          className="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline"
+          className="text-xs text-center text-gray-500 uppercase hover:underline"
         >
           or With Social Media
         </a>
 
-        <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
+        <span className="w-1/5 border-b lg:w-1/4"></span>
       </div>
 
       <div className="px-2 py-2 flex justify-center mt-3 border-2 rounded-full w-fit mx-auto cursor-pointer">

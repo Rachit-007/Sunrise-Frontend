@@ -145,9 +145,13 @@ const OpenMiniCart = ({ setOpenMiniCart }) => {
                     </p>
                     <div className="flex justify-between">
                       <div class="mt-6">
-                        <a class="flex items-center justify-center rounded-md border border-transparent bg-green-600 px-14 py-3 text-base font-medium text-white shadow-sm hover:bg-green-700">
+                        <Link
+                          to="/checkout"
+                          class="flex items-center justify-center rounded-md border border-transparent bg-green-600 px-14 py-3 cursor-pointer text-base font-medium text-white shadow-sm hover:bg-green-700"
+                          onClick={() => setOpenMiniCart(false)}
+                        >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                       <div class="mt-6">
                         <Link
