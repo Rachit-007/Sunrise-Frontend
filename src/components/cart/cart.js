@@ -7,7 +7,7 @@ import { getPrice } from "../priceCalculator";
 import CartItemCard from "./cartItemCard";
 
 const Cart = () => {
-  const { cartItems, loading, removeCartItem } = useCart();
+  const { cartItems, loading, removeCartItem, setCartItems } = useCart();
 
   console.log(cartItems);
   if (loading) {
@@ -27,7 +27,11 @@ const Cart = () => {
         <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
           <div class="rounded-lg md:w-2/3">
             {cartItems.lineItems.map((item) => (
-              <CartItemCard item={item} removeCartItem={removeCartItem} />
+              <CartItemCard
+                item={item}
+                removeCartItem={removeCartItem}
+                setCartItems={setCartItems}
+              />
             ))}
           </div>
           <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
@@ -35,7 +39,7 @@ const Cart = () => {
               <p class="text-gray-700">Subtotal</p>
               <p class="text-gray-700">
                 <span className="text-gray-500">$</span>{" "}
-                  {getPrice({
+                {getPrice({
                   centAmount: cartItems.totalPrice.centAmount,
                   fractionDigits: cartItems.totalPrice.fractionDigits,
                 })}

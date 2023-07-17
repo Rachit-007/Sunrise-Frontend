@@ -2,9 +2,10 @@ import React from "react";
 import { getPrice } from "../priceCalculator";
 import useCartCardItem from "../../talons/useCartCardItem";
 
-const CartItemCard = ({ item, removeCartItem }) => {
+const CartItemCard = ({ item, removeCartItem, setCartItems }) => {
   const { incQty, decQty, quantity, updateQty } = useCartCardItem({
     qty: item.quantity,
+    setCartItems,
   });
   return (
     <>

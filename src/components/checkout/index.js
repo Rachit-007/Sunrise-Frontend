@@ -12,7 +12,7 @@ import PaymentMethods from "./paymentMethods";
 import ChekcoutCart from "./checkoutCart";
 
 export const CheckOut = () => {
-  const { cartItems, loading, step, setStep } = useCheckout();
+  const { cartItems, loading, step, setStep, setCartItems } = useCheckout();
 
   if (loading) {
     return (
@@ -22,11 +22,13 @@ export const CheckOut = () => {
     );
   }
 
+  console.log(cartItems);
+
   if (cartItems && size(cartItems.lineItems) > 0) {
     return (
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl mt-32 max-sm:mt-40">
         <div class="flex items-center justify-center">
-          <h1 class="text-2xl font-bold text-gray-900">Checkout</h1>
+          <h1 class="text-2xl font-bold text-gray-900">CHECKOUT</h1>
           <span class="px-2 py-1 ml-4 text-xs font-bold tracking-widest uppercase bg-gray-400 rounded-full rounded-r-nonepy-1 text-gray-50">
             {" "}
             {cartItems.lineItems.length} Items{" "}
@@ -40,9 +42,9 @@ export const CheckOut = () => {
                 <div className="flex justify-between">
                   <p className="font-bold pt-3">
                     <span className="font-bold">
-                      {cartItems.lineItems.length}
+                      {/* {cartItems.lineItems.length} */}
+                      ORDER SUMMARY
                     </span>{" "}
-                    <span className="text-gray-600">Items</span>
                   </p>
                   <Link to="/cart">
                     <button className="px-8 py-2.5 font-bold bg-green-500 text-white mb-5 rounded hover:bg-green-700">
@@ -68,7 +70,26 @@ export const CheckOut = () => {
                       {getPrice({
                         centAmount: cartItems.totalPrice.centAmount,
                         fractionDigits: cartItems.totalPrice.fractionDigits,
+                      }) -
+                        getPrice({
+                          centAmount: cartItems.shippingInfo.price.centAmount,
+                          fractionDigits:
+                            cartItems.shippingInfo.price.fractionDigits,
+                        })}
+                    </p>
+                  </li>
+                  <li class="flex items-center justify-between">
+                    <p class="text-sm font-medium text-gray-600">
+                      Shipping Charges
+                    </p>
+                    <p class="text-sm font-medium text-gray-600">
+                      <span className="text-gray-500">$</span>{" "}
+                      {getPrice({
+                        centAmount: cartItems.shippingInfo.price.centAmount,
+                        fractionDigits:
+                          cartItems.shippingInfo.price.fractionDigits,
                       })}
+                      .00
                     </p>
                   </li>
                   <CoupanCode />
@@ -90,31 +111,77 @@ export const CheckOut = () => {
               <div class="px-5 py-6 md:px-8 rounded-lg shadow w-2/3 max-sm:w-full max-sm:mt-5">
                 <div class="flow-root">
                   <div class="-my-6 divide-y divide-gray-200">
-                    <CreateAccount setStep={setStep} />
+                    <CreateAccount
+                      setStep={setStep}
+                      email={cartItems.customerEmail}
+                      setCartItems={setCartItems}
+                    />
                     <div class="py-6">
-                      <h2 class="font-bold text-gray-500 text-base">
+                      <h2
+                        class={`font-bold  text-xl uppercase ${
+                          step > 1 ? "text-black" : "text-gray-500"
+                        }`}
+                      >
                         Shipping Address
                       </h2>
-                      {step > 1 && <ShippingAddress />}
+                      {step > 1 && (
+                        <ShippingAddress
+                          setStep={setStep}
+                          step={step}
+                          address={cartItems.shippingAddress}
+                          setCartItems={setCartItems}
+                        />
+                      )}
                     </div>
                     <div class="py-6">
-                      <h2 class="font-bold text-gray-500 text-base">
+                      <h2
+                        class={`font-bold  text-xl uppercase ${
+                          step > 2 ? "text-black" : "text-gray-500"
+                        }`}
+                      >
                         Shipping Methods
-                        {step > 2 && <ShippingMethod />}
+                        {step > 2 && (
+                          <ShippingMethod
+                            step={step}
+                            setStep={setStep}
+                            shippingInfo={cartItems.shippingInfo}
+                            setCartItems={setCartItems}
+                          />
+                        )}
                       </h2>
                     </div>
                     <div class="py-6">
-                      <h2 class="font-bold text-gray-500 text-base">
+                      <h2
+                        class={`font-bold  text-xl uppercase ${
+                          step > 3 ? "text-black" : "text-gray-500"
+                        }`}
+                      >
                         Billing Information
                       </h2>
-                      {step > 3 && <BillingAddress />}
+                      {step > 3 && (
+                        <BillingAddress
+                          setStep={setStep}
+                          address={cartItems.shippingAddress}
+                          setCartItems={setCartItems}
+                        />
+                      )}
                     </div>
 
                     <div class="py-6">
-                      <h2 class="font-bold text-gray-500 text-base">
+                      <h2
+                        class={`font-bold  text-xl uppercase ${
+                          step > 4 ? "text-black" : "text-gray-500"
+                        }`}
+                      >
                         Payment Method
                       </h2>
-                      {step > 4 && <PaymentMethods />}
+                      {step > 4 && (
+                        <PaymentMethods
+                          setStep={setStep}
+                          address={cartItems.billingAddress}
+                          setCartItems={setCartItems}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

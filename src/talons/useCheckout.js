@@ -5,11 +5,13 @@ import { GET_CART } from "../graphql/cart/getCart";
 
 const useCheckout = () => {
   const cart = localStorage.getItem("cart");
-  const version = localStorage.getItem("version");
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState({});
   const [step, setStep] = useState(1);
-  const [getCartDetails] = useLazyQuery(GET_CART);
+  const [getCartDetails] = useLazyQuery(GET_CART, {
+    fetchPolicy: "no-cache",
+    nextFetchPolicy: "no-cache",
+  });
 
   const getCartData = async () => {
     try {
@@ -31,7 +33,7 @@ const useCheckout = () => {
       setLoading(false);
     }
   }, []);
-  return { cartItems, loading, step, setStep };
+  return { cartItems, loading, step, setStep, setCartItems };
 };
 
 export default useCheckout;

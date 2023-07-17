@@ -1,32 +1,14 @@
 import { gql } from "@apollo/client";
 
-export const GET_CART = gql`
-  query LineItems($data: JSON) {
-    getCart(data: $data) {
-      customerEmail
+export const ADD_EMAIL = gql`
+  mutation Mutation($data: JSON) {
+    addEmailToCart(data: $data) {
+      version
       totalPrice {
         centAmount
         fractionDigits
       }
-      shippingInfo {
-        shippingMethodName
-        price {
-          centAmount
-          fractionDigits
-        }
-        shippingMethod {
-          id
-        }
-      }
-      shippingAddress {
-        firstName
-        lastName
-        building
-        city
-        postalCode
-        country
-        mobile
-      }
+      customerEmail
       lineItems {
         id
         productId

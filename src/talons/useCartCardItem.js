@@ -4,34 +4,37 @@ import { useState } from "react";
 import { UPDATE_CART_QTY } from "../graphql/cart/updateCartQty";
 import { useCallback } from "react";
 
-const useCartCardItem = ({ qty }) => {
+const useCartCardItem = ({ qty, setCartItems }) => {
   const [quantity, setQuantity] = useState(qty);
-  const [updateCart] = useMutation(UPDATE_CART_QTY);
+  const [updateCart] = useMutation(UPDATE_CART_QTY, {
+    fetchPolicy: "no-cache",
+  });
   const cart = localStorage.getItem("cart");
   const version = localStorage.getItem("version");
+  console.log("version", version);
 
   const updateQty = useCallback(
     debounce((id, qty) => {
       updateQuantityInCT(id, qty);
-    }, 900),
+    }, 600),
     []
   );
 
   const updateQuantityInCT = async (id, qty) => {
-    console.log("called");
-    console.log("quantity from inside the function", qty);
     try {
       const { data } = await updateCart({
         variables: {
           data: {
             cart,
-            version,
+            version: localStorage.getItem("version"),
             id,
             quantity: qty,
           },
         },
       });
       console.log(data);
+      setCartItems(data.updateCart);
+
       localStorage.setItem("version", data.updateCart.version);
     } catch (err) {
       console.log(err);

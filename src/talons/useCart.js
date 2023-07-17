@@ -35,7 +35,6 @@ export const useCart = () => {
       let { data } = await removeCart({
         variables: { data: { cart, version, lineItemId } },
       });
-      //   console.log(data);
       setCartItems(data.removeCartItem);
       toast.success("Item removed successfully");
       localStorage.setItem("version", data.removeCartItem.version);
@@ -52,5 +51,5 @@ export const useCart = () => {
     }
   }, []);
 
-  return { cartItems, loading, removeCartItem };
+  return { cartItems, loading, removeCartItem, setCartItems };
 };

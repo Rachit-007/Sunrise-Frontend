@@ -1,12 +1,26 @@
 import { gql } from "@apollo/client";
 
-export const GET_CART = gql`
-  query LineItems($data: JSON) {
-    getCart(data: $data) {
-      customerEmail
-      totalPrice {
-        centAmount
-        fractionDigits
+export const ADD_BILLING_ADDRESS = gql`
+  mutation AddBillingAddress($input: ShippingAddressInput) {
+    addBillingAddress(input: $input) {
+      version
+      shippingAddress {
+        firstName
+        lastName
+        building
+        city
+        postalCode
+        country
+        mobile
+      }
+      billingAddress {
+        firstName
+        lastName
+        building
+        city
+        postalCode
+        country
+        mobile
       }
       shippingInfo {
         shippingMethodName
@@ -18,15 +32,11 @@ export const GET_CART = gql`
           id
         }
       }
-      shippingAddress {
-        firstName
-        lastName
-        building
-        city
-        postalCode
-        country
-        mobile
+      totalPrice {
+        centAmount
+        fractionDigits
       }
+      customerEmail
       lineItems {
         id
         productId
