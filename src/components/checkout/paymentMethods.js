@@ -2,7 +2,7 @@ import React from "react";
 import usePaymentMethod from "../../hooks/usePaymentMethod";
 
 const PaymentMethods = () => {
-  const {} = usePaymentMethod();
+  const {plcaeOrder} = usePaymentMethod();
   return (
     <div className="mt-5">
       <div className="relative">
@@ -22,6 +22,7 @@ const PaymentMethods = () => {
         </label>
       </div>
       <button
+        onClick={() => plcaeOrder()}
         class="mt-5 inline-flex items-center justify-center w-full px-5 py-3 max-sm:px-4 max-sm:py-3 text-sm font-bold text-white transition-all duration-200 bg-green-500 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-900 hover:bg-green-700 max-sm:whitespace-nowrap"
         fdprocessedid="hnw2au"
       >

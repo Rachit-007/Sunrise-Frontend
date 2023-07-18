@@ -1,6 +1,6 @@
 import React from "react";
 
-const Address = ({ setValue, addressDetails, address, setAddress }) => {
+const Address = ({ setValue, addressDetails, setAddress }) => {
   return (
     <div className="mt-8 flex justify-between">
       <div>
@@ -22,12 +22,15 @@ const Address = ({ setValue, addressDetails, address, setAddress }) => {
           className="inline-flex items-center justify-center px-6 py-2 text-sm font-bold max-sm:px-4 max-sm:py-3 text-white transition-all duration-200 bg-green-500 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-900 hover:bg-green-700 max-sm:whitespace-nowrap"
           onClick={() => {
             setAddress(null);
-            setValue("firstName", address.firstName);
-            setValue("lastName", address.lastName);
-            setValue("building", address.building);
-            setValue("phone", address.mobile.slice(3, address.mobile.length));
-            setValue("city", address.city);
-            setValue("postalCode", address.postalCode);
+            setValue("firstName", addressDetails.firstName);
+            setValue("lastName", addressDetails.lastName);
+            setValue("building", addressDetails.building);
+            setValue(
+              "phone",
+              addressDetails.mobile.slice(3, addressDetails.mobile.length)
+            );
+            setValue("city", addressDetails.city);
+            setValue("postalCode", addressDetails.postalCode);
           }}
         >
           Edit

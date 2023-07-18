@@ -3,10 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ADD_BILLING_ADDRESS } from "../graphql/cart/addBillingAddress";
 
-const useBillingAddress = (address, setStep, setCartItems) => {
+const useBillingAddress = (
+  shippingAddressInfo,
+  billingAddressInfo,
+  setStep,
+  setCartItems
+) => {
   const { register, handleSubmit, setValue } = useForm();
-  const [billingAdress, setBillingAddress] = useState(address);
+  const [billingAdress, setBillingAddress] = useState();
+
   const [addCustomerBillingAddress] = useMutation(ADD_BILLING_ADDRESS);
+
+  console.log("--------->billingAddress-------->", billingAddressInfo);
+  console.log("--------->shippingAddress-------->", shippingAddressInfo);
 
   const onSubmit = async ({
     firstName,
@@ -46,9 +55,12 @@ const useBillingAddress = (address, setStep, setCartItems) => {
   };
 
   useEffect(() => {
-    if (address) {
-      setStep(5);
+    if (billingAddressInfo) {
+      setBillingAddress(billingAddressInfo);
+    } else if (shippingAddressInfo) {
+      setBillingAddress(shippingAddressInfo);
     }
+    setStep(5);
   }, []);
 
   return {

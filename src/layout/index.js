@@ -8,6 +8,7 @@ import ProductListing from "../components/product/productListing";
 import Login from "../components/login";
 import Cart from "../components/cart/cart";
 import { CheckOut } from "../components/checkout";
+import Orders from "../components/orders";
 
 const Layout = () => {
   return (
@@ -17,6 +18,7 @@ const Layout = () => {
         <Route path="/product" element={<ProductListing />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/orders" element={<Orders />}></Route>
         <Route path="/checkout" element={<CheckOut />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/product/:id" element={<ProductDescription />}></Route>

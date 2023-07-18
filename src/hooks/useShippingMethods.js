@@ -4,7 +4,6 @@ import { ADD_SHIPPING_METHODS } from "../graphql/cart/addShippingMethod";
 import { GET_SHIPPING_METHODS } from "../graphql/cart/getShippingMethod";
 
 const useShippingMethods = (shippingInfo, setStep, setCartItems, step) => {
-  console.log(shippingInfo);
   const {
     data: shippingData,
     loading,
@@ -29,7 +28,7 @@ const useShippingMethods = (shippingInfo, setStep, setCartItems, step) => {
       });
       console.log(data);
       if (step > 4) {
-        console.log("hit")
+        console.log("hit");
         setStep(5);
       } else {
         setStep(4);

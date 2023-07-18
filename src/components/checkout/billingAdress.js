@@ -4,7 +4,12 @@ import useBillingAddress from "../../hooks/useBillingAddress";
 import Address from "./common/address";
 import DetailsForm from "./common/detailsForm";
 
-const BillingAddress = ({ setStep, address, setCartItems }) => {
+const BillingAddress = ({
+  setStep,
+  shipppingAddressInfo,
+  billingAddressInfo,
+  setCartItems,
+}) => {
   const {
     billingAdress,
     setValue,
@@ -12,9 +17,14 @@ const BillingAddress = ({ setStep, address, setCartItems }) => {
     register,
     setBillingAddress,
     onSubmit,
-  } = useBillingAddress(address, setStep, setCartItems);
+  } = useBillingAddress(
+    shipppingAddressInfo,
+    billingAddressInfo,
+    setStep,
+    setCartItems
+  );
 
-  console.log(billingAdress)
+  console.log(billingAddressInfo);
 
   return (
     <>
@@ -22,7 +32,6 @@ const BillingAddress = ({ setStep, address, setCartItems }) => {
         <Address
           setValue={setValue}
           addressDetails={billingAdress}
-          address={address}
           setAddress={setBillingAddress}
         />
       ) : (

@@ -16,8 +16,6 @@ const ShippingMethod = ({ setStep, shippingInfo, setCartItems, step }) => {
     return <Loader />;
   }
 
-  console.log(userShippingMethod);
-
   return (
     <>
       {userShippingMethod ? (
@@ -55,7 +53,9 @@ const ShippingMethod = ({ setStep, shippingInfo, setCartItems, step }) => {
                   type="radio"
                   name="radio"
                   onChange={() => handleChange(method.id)}
-                  defaultChecked={method.id === shippingInfo.shippingMethod.id}
+                  defaultChecked={
+                    method.id === shippingInfo?.shippingMethod?.id
+                  }
                 />
 
                 <span className="peer-checked:border-green-500 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />

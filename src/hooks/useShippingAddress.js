@@ -40,11 +40,8 @@ const useShippingAddress = (setStep, address, setCartItems, step) => {
       console.log(step);
       setCartItems(data.addShippingAddress);
       setShippingAddress(data.addShippingAddress.shippingAddress);
-      if (step > 2) {
-        setStep(4);
-      } else if (step > 4) {
-        setStep(5);
-      } else {
+      console.log("step--------------->", step);
+      if (step == 2) {
         setStep(3);
       }
     } catch (err) {

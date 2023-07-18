@@ -22,7 +22,6 @@ const ShippingAddress = ({ setStep, address, setCartItems, step }) => {
         <Address
           setValue={setValue}
           addressDetails={shippingAdress}
-          address={address}
           setAddress={setShippingAddress}
         />
       ) : (

@@ -1,40 +1,34 @@
 import { gql } from "@apollo/client";
 
-export const GET_CART = gql`
-  query LineItems($data: JSON) {
-    getCart(data: $data) {
+export const GET_ORDERS = gql`
+  query GetOrders {
+    getOrders {
+      id
+      version
+      createdAt
+      orderNumber
+      customerId
       customerEmail
-      totalPrice {
-        centAmount
-        fractionDigits
-      }
-      shippingInfo {
-        shippingMethodName
-        price {
-          centAmount
-          fractionDigits
-        }
-        shippingMethod {
-          id
-        }
-      }
+      orderState
       shippingAddress {
         firstName
         lastName
-        building
-        city
-        postalCode
-        country
         mobile
+        building
+        state
+        city
+        country
+        postalCode
       }
       billingAddress {
         firstName
         lastName
-        building
-        city
-        postalCode
-        country
         mobile
+        building
+        state
+        country
+        postalCode
+        city
       }
       lineItems {
         id
@@ -46,20 +40,29 @@ export const GET_CART = gql`
           en
         }
         variant {
+          prices {
+            value {
+              centAmount
+              fractionDigits
+            }
+          }
           images {
             url
+          }
+          attributes {
+            name
           }
         }
         quantity
         price {
           value {
-            fractionDigits
             centAmount
+            fractionDigits
           }
         }
         totalPrice {
-          fractionDigits
           centAmount
+          fractionDigits
         }
       }
     }

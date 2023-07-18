@@ -22,6 +22,7 @@ export const CheckOut = () => {
     );
   }
 
+  console.log("------------index------", cartItems.billingAddress);
   console.log(cartItems);
 
   if (cartItems && size(cartItems.lineItems) > 0) {
@@ -67,31 +68,38 @@ export const CheckOut = () => {
                     <p class="text-sm font-medium text-gray-600">Sub total</p>
                     <p class="text-sm font-medium text-gray-600">
                       <span className="text-gray-500">$</span>{" "}
-                      {getPrice({
-                        centAmount: cartItems.totalPrice.centAmount,
-                        fractionDigits: cartItems.totalPrice.fractionDigits,
-                      }) -
-                        getPrice({
+                      {step > 3
+                        ? getPrice({
+                            centAmount: cartItems.totalPrice.centAmount,
+                            fractionDigits: cartItems.totalPrice.fractionDigits,
+                          }) -
+                          getPrice({
+                            centAmount: cartItems.shippingInfo.price.centAmount,
+                            fractionDigits:
+                              cartItems.shippingInfo.price.fractionDigits,
+                          })
+                        : getPrice({
+                            centAmount: cartItems.totalPrice.centAmount,
+                            fractionDigits: cartItems.totalPrice.fractionDigits,
+                          })}
+                    </p>
+                  </li>
+                  {step > 3 && (
+                    <li class="flex items-center justify-between">
+                      <p class="text-sm font-medium text-gray-600">
+                        Shipping Charges
+                      </p>
+                      <p class="text-sm font-medium text-gray-600">
+                        <span className="text-gray-500">$</span>{" "}
+                        {getPrice({
                           centAmount: cartItems.shippingInfo.price.centAmount,
                           fractionDigits:
                             cartItems.shippingInfo.price.fractionDigits,
                         })}
-                    </p>
-                  </li>
-                  <li class="flex items-center justify-between">
-                    <p class="text-sm font-medium text-gray-600">
-                      Shipping Charges
-                    </p>
-                    <p class="text-sm font-medium text-gray-600">
-                      <span className="text-gray-500">$</span>{" "}
-                      {getPrice({
-                        centAmount: cartItems.shippingInfo.price.centAmount,
-                        fractionDigits:
-                          cartItems.shippingInfo.price.fractionDigits,
-                      })}
-                      .00
-                    </p>
-                  </li>
+                        .00
+                      </p>
+                    </li>
+                  )}
                   <CoupanCode />
                   <hr class="mt-6 border-gray-200" />
 
@@ -142,9 +150,9 @@ export const CheckOut = () => {
                         Shipping Methods
                         {step > 2 && (
                           <ShippingMethod
-                            step={step}
                             setStep={setStep}
                             shippingInfo={cartItems.shippingInfo}
+                            step={step}
                             setCartItems={setCartItems}
                           />
                         )}
@@ -161,7 +169,8 @@ export const CheckOut = () => {
                       {step > 3 && (
                         <BillingAddress
                           setStep={setStep}
-                          address={cartItems.shippingAddress}
+                          shipppingAddressInfo={cartItems.shippingAddress}
+                          billingAddressInfo={cartItems.billingAddress}
                           setCartItems={setCartItems}
                         />
                       )}
